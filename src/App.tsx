@@ -7,9 +7,16 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
 import { Layout } from "./components/layout";
+import { Dashboard } from "./pages/dashboard";
 
 function App() {
   return (
@@ -19,6 +26,12 @@ function App() {
         <Refine
           dataProvider={dataProvider("https://api.finefoods.refine.dev")}
           routerProvider={routerBindings}
+          resources={[
+            {
+              name: "dashboard",
+              list: "/dashboard",
+            },
+          ]}
           options={{
             syncWithLocation: true,
             warnWhenUnsavedChanges: true,
@@ -32,6 +45,10 @@ function App() {
                 </Layout>
               }
             >
+              <Route index element={<Navigate to="/dashboard" />} />
+              <Route path="/dashboard">
+                <Route index element={<Dashboard />} />
+              </Route>
               <Route path="*" element={<ErrorComponent />} />
             </Route>
           </Routes>
