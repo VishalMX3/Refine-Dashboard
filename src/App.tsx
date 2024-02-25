@@ -23,6 +23,13 @@ import {
   ProductEdit,
   ProductShow,
 } from "./pages/products";
+import {
+  CategoryList,
+  CategoryCreate,
+  CategoryEdit,
+  CategoryShow,
+} from "./pages/categories";
+import { HomeIcon, ShoppingCartIcon, TagIcon } from "@heroicons/react/20/solid";
 
 function App() {
   return (
@@ -36,6 +43,9 @@ function App() {
             {
               name: "dashboard",
               list: "/dashboard",
+              meta: {
+                icon: <HomeIcon className="h-4 w-4" />,
+              },
             },
             {
               name: "products",
@@ -44,6 +54,19 @@ function App() {
               edit: "/products/edit/:id",
               show: "/products/show/:id",
               meta: {
+                icon: <ShoppingCartIcon className="h-4 w-4" />,
+                canDelete: true,
+              },
+            },
+
+            {
+              name: "categories",
+              list: "/categories",
+              create: "/categories/create",
+              edit: "/categories/edit/:id",
+              show: "/categories/show/:id",
+              meta: {
+                icon: <TagIcon className="h-4 w-4" />,
                 canDelete: true,
               },
             },
@@ -70,6 +93,12 @@ function App() {
                 <Route path="create" element={<ProductCreate />} />
                 <Route path="edit/:id" element={<ProductEdit />} />
                 <Route path="show/:id" element={<ProductShow />} />
+              </Route>
+              <Route path="/categories">
+                <Route index element={<CategoryList />} />
+                <Route path="create" element={<CategoryCreate />} />
+                <Route path="edit/:id" element={<CategoryEdit />} />
+                <Route path="show/:id" element={<CategoryShow />} />
               </Route>
               <Route path="*" element={<ErrorComponent />} />
             </Route>
