@@ -17,6 +17,12 @@ import {
 import "./App.css";
 import { Layout } from "./components/layout";
 import { Dashboard } from "./pages/dashboard";
+import {
+  ProductList,
+  ProductCreate,
+  ProductEdit,
+  ProductShow,
+} from "./pages/products";
 
 function App() {
   return (
@@ -30,6 +36,16 @@ function App() {
             {
               name: "dashboard",
               list: "/dashboard",
+            },
+            {
+              name: "products",
+              list: "/products",
+              create: "/products/create",
+              edit: "/products/edit/:id",
+              show: "/products/show/:id",
+              meta: {
+                canDelete: true,
+              },
             },
           ]}
           options={{
@@ -48,6 +64,12 @@ function App() {
               <Route index element={<Navigate to="/dashboard" />} />
               <Route path="/dashboard">
                 <Route index element={<Dashboard />} />
+              </Route>
+              <Route path="/products">
+                <Route index element={<ProductList />} />
+                <Route path="create" element={<ProductCreate />} />
+                <Route path="edit/:id" element={<ProductEdit />} />
+                <Route path="show/:id" element={<ProductShow />} />
               </Route>
               <Route path="*" element={<ErrorComponent />} />
             </Route>
