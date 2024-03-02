@@ -8,7 +8,7 @@ import {
   Tooltip,
   Bar,
 } from "recharts";
-import { ChartTooltip } from "./ChartToolTip";
+import { ChartTooltip } from "./ChartTooltip";
 import { IChartDatum } from "../../interfaces";
 
 type TResponsiveBarChartProps = {
